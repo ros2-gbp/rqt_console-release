@@ -1,3 +1,26 @@
+## rqt_console (eloquent) - 1.1.0-1
+
+The packages in the `rqt_console` repository were released into the `eloquent` distro by running `/usr/bin/bloom-release --rosdistro eloquent rqt_console` on `Thu, 03 Oct 2019 16:34:15 -0000`
+
+The `rqt_console` package was released.
+
+Version of package(s) in repository `rqt_console`:
+
+- upstream repository: https://github.com/ros-visualization/rqt_console.git
+- release repository: unknown
+- rosdistro version: `null`
+- old version: `null`
+- new version: `1.1.0-1`
+
+Versions of tools used:
+
+- bloom version: `0.8.0`
+- catkin_pkg version: `0.4.13`
+- rosdep version: `0.16.1`
+- rosdistro version: `0.7.4`
+- vcstools version: `0.1.42`
+
+
 ## rqt_console (dashing) - 1.1.0-1
 
 The packages in the `rqt_console` repository were released into the `dashing` distro by running `/usr/bin/bloom-release -r dashing -t dashing rqt_console` on `Thu, 03 Oct 2019 16:12:07 -0000`
