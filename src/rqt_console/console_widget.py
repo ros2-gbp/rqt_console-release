@@ -51,7 +51,6 @@ from .filters.message_filter import MessageFilter
 from .filters.node_filter import NodeFilter
 from .filters.severity_filter import SeverityFilter
 from .filters.time_filter import TimeFilter
-from .filters.topic_filter import TopicFilter
 
 from .filters.custom_filter_widget import CustomFilterWidget
 from .filters.filter_wrapper_widget import FilterWrapperWidget
@@ -115,6 +114,9 @@ class ConsoleWidget(QWidget):
             self.table_view.horizontalHeader().setSortIndicatorShown(logical_index != 0)
         self.table_view.horizontalHeader().sortIndicatorChanged.connect(update_sort_indicator)
 
+        self.table_view.horizontalHeader().setContextMenuPolicy(Qt.CustomContextMenu)
+        self.table_view.horizontalHeader().customContextMenuRequested.connect(self._handle_column_right_click)
+
         self.add_exclude_button.setIcon(QIcon.fromTheme('list-add'))
         self.add_highlight_button.setIcon(QIcon.fromTheme('list-add'))
         self.pause_button.setIcon(QIcon.fromTheme('media-playback-pause'))
@@ -156,7 +158,7 @@ class ConsoleWidget(QWidget):
         # provides filtering logic index 2 is the widget that sets the data in the
         # filter class, index 3 are the arguments for the widget class constructor
         self._filter_factory_order = [
-            'message', 'severity', 'node', 'time', 'topic', 'location', 'custom']
+            'message', 'severity', 'node', 'time', 'location', 'custom']
         self.filter_factory = {
             'message': (
                 self.tr('...containing'),
@@ -177,11 +179,6 @@ class ConsoleWidget(QWidget):
                 TimeFilter,
                 TimeFilterWidget,
                 self.get_time_range_from_selection),
-            'topic': (
-                self.tr('...from topic'),
-                TopicFilter,
-                ListFilterWidget,
-                self._model.get_unique_topics),
             'location': (
                 self.tr('...from location'),
                 LocationFilter,
@@ -191,8 +188,7 @@ class ConsoleWidget(QWidget):
                 CustomFilter,
                 CustomFilterWidget,
                 [self._model.get_severity_dict,
-                 self._model.get_unique_nodes,
-                 self._model.get_unique_topics])}
+                 self._model.get_unique_nodes])}
 
         self._model.rowsInserted.connect(self.update_status)
         self._model.rowsRemoved.connect(self.update_status)
@@ -422,7 +418,6 @@ class ConsoleWidget(QWidget):
         """
         types = {
             self.tr('Node'): 2,
-            self.tr('Topic'): 4,
             self.tr('Severity'): 1,
             self.tr('Message'): 0}
         try:
@@ -434,23 +429,22 @@ class ConsoleWidget(QWidget):
         if col == 0:
             unique_messages = set()
             selected_indexes = self.table_view.selectionModel().selectedIndexes()
-            num_selected = len(selected_indexes) / 6
+            colcount = len(MessageDataModel.columns) + 1
+            num_selected = len(selected_indexes) // colcount
             for index in range(num_selected):
-                unique_messages.add(selected_indexes[num_selected * col + index].data())
+                unique_messages.add(selected_indexes[(index * colcount) + 1].data())
             unique_messages = list(unique_messages)
             for message in unique_messages:
-                message = message.replace('\\', '\\\\')
-                message = message.replace('.', '\\.')
                 if exclude:
                     filter_index = self._add_exclude_filter(selectiontype.lower())
                     filter_widget = self._exclude_filters[filter_index][1].findChildren(
                         QWidget, QRegExp('.*FilterWidget.*'))[0]
                 else:
-                    filter_index = self._add_highlight_filter(col)
+                    filter_index = self._add_highlight_filter(selectiontype.lower())
                     filter_widget = self._highlight_filters[filter_index][1].findChildren(
                         QWidget, QRegExp('.*FilterWidget.*'))[0]
-                filter_widget.set_regex(True)
-                filter_widget.set_text('^' + message + '$')
+                filter_widget.set_regex(False)
+                filter_widget.set_text(message)
 
         else:
             if exclude:
@@ -492,17 +486,14 @@ class ConsoleWidget(QWidget):
             if severity in self._model.get_unique_severities():
                 severities[severity] = label
         nodes = sorted(self._model.get_unique_nodes())
-        topics = sorted(self._model.get_unique_topics())
 
         # menutext entries turned into
         menutext = []
         menutext.append([self.tr('Exclude'), [[self.tr('Severity'), severities],
                                               [self.tr('Node'), nodes],
-                                              [self.tr('Topic'), topics],
                                               [self.tr('Selected Message(s)')]]])
         menutext.append([self.tr('Highlight'), [[self.tr('Severity'), severities],
                                                 [self.tr('Node'), nodes],
-                                                [self.tr('Topic'), topics],
                                                 [self.tr('Selected Message(s)')]]])
         menutext.append([self.tr('Copy Selected')])
         menutext.append([self.tr('Browse Selected')])
@@ -551,7 +542,7 @@ class ConsoleWidget(QWidget):
             else:
                 raise RuntimeError("Menu format corruption in ConsoleWidget._rightclick_menu()")
         else:
-            # This processes the dynamic list entries (severity, node and topic)
+            # This processes the dynamic list entries (severity and node)
             try:
                 roottitle = action.parentWidget().parentWidget().title()
             except:
@@ -674,7 +665,8 @@ class ConsoleWidget(QWidget):
                             break
                         msg.stamp = (int(parts[0]), int(parts[1]))
                     elif column == 'topics':
-                        msg.topics = value.split(',')
+                        # ignore column from files written by ROS 1
+                        pass
                     elif column == 'node':
                         msg.node = value
                     elif column == 'location':
@@ -694,7 +686,7 @@ class ConsoleWidget(QWidget):
             if messages:
                 self._model.insert_rows(messages)
 
-                self._handle_pause_clicked(True)
+                self._handle_pause_clicked()
 
             return True
 
@@ -724,7 +716,6 @@ class ConsoleWidget(QWidget):
                     data['severity'] = str(msg.severity)
                     data['node'] = msg.node
                     data['stamp'] = str(msg.stamp[0]) + '.' + str(msg.stamp[1]).zfill(9)
-                    data['topics'] = ','.join(msg.topics)
                     data['location'] = msg.location
                     line = []
                     for column in MessageDataModel.columns:
@@ -749,6 +740,23 @@ class ConsoleWidget(QWidget):
 
     def _handle_column_resize_clicked(self):
         self.table_view.resizeColumnsToContents()
+
+    def _handle_column_right_click(self, pos):
+        menu = QMenu(self)
+        hide = menu.addAction('Hide Column')
+        showall = menu.addAction('Show all columns')
+
+        # Don't allow hiding the last column
+        if self.table_view.horizontalHeader().count() - self.table_view.horizontalHeader().hiddenSectionCount() == 1:
+            hide.setEnabled(False)
+
+        ac = menu.exec_(self.table_view.horizontalHeader().mapToGlobal(pos))
+        if ac == hide:
+            column = self.table_view.horizontalHeader().logicalIndexAt(pos.x())
+            self.table_view.horizontalHeader().hideSection(column)
+        elif ac == showall:
+            for i in range(self.table_view.horizontalHeader().count()):
+                self.table_view.horizontalHeader().showSection(i)
 
     def _delete_selected_rows(self):
         rowlist = []
