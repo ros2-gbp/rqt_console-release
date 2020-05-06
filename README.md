@@ -1,3 +1,26 @@
+## rqt_console (foxy) - 1.1.1-1
+
+The packages in the `rqt_console` repository were released into the `foxy` distro by running `/usr/bin/bloom-release -r foxy -t foxy rqt_console` on `Wed, 06 May 2020 18:00:53 -0000`
+
+The `rqt_console` package was released.
+
+Version of package(s) in repository `rqt_console`:
+
+- upstream repository: https://github.com/ros-visualization/rqt_console.git
+- release repository: unknown
+- rosdistro version: `null`
+- old version: `null`
+- new version: `1.1.1-1`
+
+Versions of tools used:
+
+- bloom version: `0.9.7`
+- catkin_pkg version: `0.4.18`
+- rosdep version: `0.19.0`
+- rosdistro version: `0.8.1`
+- vcstools version: `0.1.42`
+
+
 ## rqt_console (dashing) - 1.1.1-1
 
 The packages in the `rqt_console` repository were released into the `dashing` distro by running `/usr/bin/bloom-release -r dashing -t dashing rqt_console` on `Tue, 14 Jan 2020 23:07:39 -0000`
