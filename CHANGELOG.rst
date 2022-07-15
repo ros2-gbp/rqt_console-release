@@ -2,26 +2,13 @@
 Changelog for package rqt_console
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-2.1.0 (2022-05-10)
+1.1.2 (2022-07-16)
 ------------------
+* Merge pull request `#37 <https://github.com/ros-visualization/rqt_console/issues/37>`_ from coalman321/ros2
+  Use a custom QoS profile based on the default rosout QoS profile
 * added new maintainer
-* Contributors: Arne Hitzmann
-
-2.0.2 (2021-10-27)
-------------------
-* Use a custom QoS profile based on the default rosout QoS profile (`#37 <https://github.com/ros-visualization/rqt_console/issues/37>`_)
-* Contributors: Arne Hitzmann, Cole Tucker
-
-2.0.1 (2021-04-27)
-------------------
-* Use underscores in setup.cfg instead of dashes (`#31 <https://github.com/ros-visualization/rqt_console/issues/31>`_)
-* Contributors: Michel Hidalgo
-
-2.0.0 (2021-03-18)
-------------------
 * Fix regression introduced in `#21 <https://github.com/ros-visualization/rqt_console/issues/21>`_ (`#28 <https://github.com/ros-visualization/rqt_console/issues/28>`_)
 * Changed the build type to ament_python and added setup.cfg (`#21 <https://github.com/ros-visualization/rqt_console/issues/21>`_)
-* Contributors: Alejandro Hernández Cordero
 
 1.1.1 (2020-01-14)
 ------------------
