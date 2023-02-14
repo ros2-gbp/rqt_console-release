@@ -1,11 +1,13 @@
 <package format="2">
   <name>rqt_console</name>
-  <version>2.1.0</version>
+  <version>2.1.1</version>
   <description>rqt_console provides a GUI plugin for displaying and filtering ROS messages.</description>
-  <maintainer email="dthomas@osrfoundation.org">Dirk Thomas</maintainer>
-  <maintainer email="ablasdel@gmail.com">Aaron Blasdel</maintainer>
+
+  <maintainer email="dharini@openrobotics.org">Dharini Dutia</maintainer>
   <maintainer email="arne.hitzmann@gmail.com">Arne Hitzmann</maintainer>
+
   <author>Aaron Blasdel</author>
+  <author email="dthomas@osrfoundation.org">Dirk Thomas</author>
 
   <license>BSD</license>
 
