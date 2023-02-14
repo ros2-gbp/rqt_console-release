@@ -4,7 +4,7 @@ package_name = 'rqt_console'
 
 setup(
     name=package_name,
-    version='2.1.0',
+    version='2.1.1',
     packages=[package_name, package_name + '.filters'],
     package_dir={'': 'src'},
     data_files=[
@@ -26,8 +26,8 @@ setup(
     install_requires=['setuptools'],
     zip_safe=True,
     author='Aaron Blasdel',
-    maintainer='Dirk Thomas, Aaron Blasdel',
-    maintainer_email='dthomas@osrfoundation.org',
+    maintainer='Dharini Dutia',
+    maintainer_email='dharini@openrobotics.org',
     keywords=['ROS'],
     classifiers=[
         'Intended Audience :: Developers',
