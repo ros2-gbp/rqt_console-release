@@ -1,6 +1,6 @@
 <package format="2">
   <name>rqt_console</name>
-  <version>2.2.0</version>
+  <version>2.2.1</version>
   <description>rqt_console provides a GUI plugin for displaying and filtering ROS messages.</description>
 
   <maintainer email="dharini@openrobotics.org">Dharini Dutia</maintainer>
@@ -18,15 +18,12 @@
   <exec_depend>ament_index_python</exec_depend>
   <exec_depend version_gte="0.2.19">python_qt_binding</exec_depend>
   <exec_depend>rclpy</exec_depend>
+  <exec_depend>rcl_interfaces</exec_depend>
   <exec_depend>rqt_gui</exec_depend>
   <exec_depend>rqt_gui_py</exec_depend>
   <exec_depend>rqt_py_common</exec_depend>
 
-  <!-- TODO(mlautman): Replace once rqt_logger_level has been ported -->
-  <!-- <exec_depend>rqt_logger_level</exec_depend> -->
-
-  <!-- Note: This is needed for rcl_interfaces Log.msg -->
-  <exec_depend>rcl_interfaces</exec_depend>
+  <test_depend>python3-pytest</test_depend>
 
   <export>
     <architecture_independent/>

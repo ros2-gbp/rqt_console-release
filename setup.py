@@ -4,7 +4,7 @@ package_name = 'rqt_console'
 
 setup(
     name=package_name,
-    version='2.2.0',
+    version='2.2.1',
     packages=[package_name, package_name + '.filters'],
     package_dir={'': 'src'},
     data_files=[
@@ -39,6 +39,7 @@ setup(
         'rqt_console provides a GUI plugin for displaying and filtering ROS messages.'
     ),
     license='BSD',
+    tests_require=['pytest'],
     entry_points={
         'console_scripts': [
             'rqt_console = ' + package_name + '.main:main',
