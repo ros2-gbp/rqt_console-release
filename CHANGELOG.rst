@@ -2,20 +2,7 @@
 Changelog for package rqt_console
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-2.2.1 (2024-02-07)
-------------------
-* Add a test dependency on pytest. (`#45 <https://github.com/ros-visualization/rqt_console/issues/45>`_)
-* Contributors: Arne Hitzmann, Chris Lalancette
-
-2.2.0 (2023-04-28)
-------------------
-
-2.1.1 (2023-02-14)
-------------------
-* [rolling] Update maintainers - 2022-11-07 (`#39 <https://github.com/ros-visualization/rqt_console/issues/39>`_)
-* Contributors: Arne Hitzmann, Audrow Nash
-
-2.1.0 (2022-05-10)
+2.0.3 (2024-02-16)
 ------------------
 * added new maintainer
 * Contributors: Arne Hitzmann
