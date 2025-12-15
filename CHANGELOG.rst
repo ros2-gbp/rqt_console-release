@@ -2,19 +2,11 @@
 Changelog for package rqt_console
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-2.3.2 (2025-12-15)
+2.2.2 (2025-12-15)
 ------------------
-* fix setuptools deprecations (backport `#50 <https://github.com/ros-visualization/rqt_console/issues/50>`_) (`#51 <https://github.com/ros-visualization/rqt_console/issues/51>`_)
+* fix setuptools deprecations (backport `#50 <https://github.com/ros-visualization/rqt_console/issues/50>`_) (`#52 <https://github.com/ros-visualization/rqt_console/issues/52>`_)
+* Remove CODEOWNERS and mirror-rolling-to-main workflow (backport `#46 <https://github.com/ros-visualization/rqt_console/issues/46>`_) (`#47 <https://github.com/ros-visualization/rqt_console/issues/47>`_)
 * Contributors: mergify[bot]
-
-2.3.1 (2025-01-07)
-------------------
-* Add in standard tests. (`#48 <https://github.com/ros-visualization/rqt_console/issues/48>`_)
-* Remove CODEOWNERS and mirror-rolling-to-main workflow (`#46 <https://github.com/ros-visualization/rqt_console/issues/46>`_)
-* Contributors: Alejandro Hernández Cordero, Chris Lalancette
-
-2.3.0 (2024-04-26)
-------------------
 
 2.2.1 (2024-02-07)
 ------------------
