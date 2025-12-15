@@ -136,15 +136,11 @@ class Console(Plugin):
         ])
 
         dialog = ConsoleSettingsDialog(topics)
-        topic, message_limit, colors_enabled = dialog.query(self._topic,
-                                                            self._model.get_message_limit(),
-                                                            self._model.get_colors_enabled())
+        (topic, message_limit) = dialog.query(self._topic, self._model.get_message_limit())
         if topic != self._topic:
             self._subscribe(topic)
         if message_limit != self._model.get_message_limit():
             self._model.set_message_limit(message_limit)
-        if colors_enabled != self._model.get_colors_enabled():
-            self._model.set_colors_enabled(colors_enabled)
 
     def _subscribe(self, topic):
         if self._subscriber:
