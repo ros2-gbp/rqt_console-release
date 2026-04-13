@@ -1,3 +1,26 @@
+## rqt_console (rolling) - 2.4.3-1
+
+The packages in the `rqt_console` repository were released into the `rolling` distro by running `/usr/bin/bloom-release --rosdistro rolling --track rolling rqt_console` on `Mon, 13 Apr 2026 11:17:47 -0000`
+
+The `rqt_console` package was released.
+
+Version of package(s) in repository `rqt_console`:
+
+- upstream repository: https://github.com/ros-visualization/rqt_console.git
+- release repository: https://github.com/ros2-gbp/rqt_console-release.git
+- rosdistro version: `2.4.2-1`
+- old version: `2.4.2-1`
+- new version: `2.4.3-1`
+
+Versions of tools used:
+
+- bloom version: `0.13.0`
+- catkin_pkg version: `1.1.0`
+- rosdep version: `0.26.0`
+- rosdistro version: `1.0.1`
+- vcstools version: `0.1.42`
+
+
 ## rqt_console (jazzy) - 2.2.2-1
 
 The packages in the `rqt_console` repository were released into the `jazzy` distro by running `/usr/bin/bloom-release --rosdistro jazzy --track jazzy rqt_console` on `Mon, 15 Dec 2025 18:00:37 -0000`
