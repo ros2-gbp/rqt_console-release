@@ -1,5 +1,3 @@
-# Software License Agreement (BSD License)
-#
 # Copyright (c) 2012, Willow Garage, Inc.
 # All rights reserved.
 #
@@ -7,21 +5,21 @@
 # modification, are permitted provided that the following conditions
 # are met:
 #
-#  * Redistributions of source code must retain the above copyright
-#    notice, this list of conditions and the following disclaimer.
-#  * Redistributions in binary form must reproduce the above
-#    copyright notice, this list of conditions and the following
-#    disclaimer in the documentation and/or other materials provided
-#    with the distribution.
-#  * Neither the name of Willow Garage, Inc. nor the names of its
-#    contributors may be used to endorse or promote products derived
-#    from this software without specific prior written permission.
+#   * Redistributions of source code must retain the above copyright
+#     notice, this list of conditions and the following disclaimer.
+#   * Redistributions in binary form must reproduce the above
+#     copyright notice, this list of conditions and the following
+#     disclaimer in the documentation and/or other materials provided
+#     with the distribution.
+#   * Neither the name of the Willow Garage, Inc. nor the names of its
+#     contributors may be used to endorse or promote products derived
+#     from this software without specific prior written permission.
 #
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 # "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 # LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
 # FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
-# COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+# COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
 # INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
 # BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
 # LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
@@ -59,7 +57,7 @@ class CustomFilterWidget(QWidget):
         # keep color for highlighted items even when not active
         for list_widget in [self.severity_list, self.node_list]:
             active_color = list_widget.palette().brush(
-                QPalette.Active, QPalette.Highlight).color().name()
+                QPalette.ColorGroup.Active, QPalette.ColorRole.Highlight).color().name()
             list_widget.setStyleSheet(
                 'QListWidget:item:selected:!active { background: %s; }' % active_color)
 
@@ -74,7 +72,8 @@ class CustomFilterWidget(QWidget):
         for key in sorted(new_items.keys()):
             item = new_items[key]
             self.severity_list.addItem(item)
-            self.severity_list.item(self.severity_list.count() - 1).setData(Qt.UserRole, key)
+            self.severity_list.item(self.severity_list.count() - 1).setData(
+                Qt.ItemDataRole.UserRole, key)
 
         # Node Filter Initialization
         self._node_list_populate_function = item_providers[1]
@@ -95,19 +94,14 @@ class CustomFilterWidget(QWidget):
         self._parentfilter._message.set_regex(clicked)
 
     def repopulate(self):
-        """
-        Repopulates the display widgets based on the function arguments passed
-        in during initialization
-        """
+        """Repopulates display widgets based on function arguments passed during init."""
         newset = self._node_list_populate_function()
         for item in newset:
-            if len(self.node_list.findItems(item, Qt.MatchExactly)) == 0:
+            if len(self.node_list.findItems(item, Qt.MatchFlag.MatchExactly)) == 0:
                 self._add_item(self.node_list, item)
 
     def _add_item(self, list_widget, item):
-        """
-        Insert item in alphabetical order.
-        """
+        """Insert item in alphabetical order."""
         for i in range(list_widget.count()):
             if item <= list_widget.item(i).text():
                 list_widget.insertItem(i, item)
@@ -116,7 +110,8 @@ class CustomFilterWidget(QWidget):
 
     def save_settings(self, settings):
         """
-        Saves the settings for this filter to an ini file.
+        Save the settings for this filter to an ini file.
+
         :param settings: used to write the settings to an ini file ''qt_gui.settings.Settings''
         """
         settings.set_value('text', self._parentfilter._message._text)
@@ -130,7 +125,8 @@ class CustomFilterWidget(QWidget):
 
     def restore_settings(self, settings):
         """
-        Restores the settings for this filter from an ini file.
+        Restore the settings for this filter from an ini file.
+
         :param settings: used to extract the settings from an ini file ''qt_gui.settings.Settings''
         """
         text = settings.value('text', '')
@@ -146,7 +142,7 @@ class CustomFilterWidget(QWidget):
             self.severity_list.item(index).setSelected(False)
         severity_item_list = unpack(settings.value('severityitemlist'))
         for item in severity_item_list:
-            items = self.severity_list.findItems(item, Qt.MatchExactly)
+            items = self.severity_list.findItems(item, Qt.MatchFlag.MatchExactly)
             for item in items:
                 item.setSelected(True)
         self.handle_severity_item_changed()
@@ -156,9 +152,9 @@ class CustomFilterWidget(QWidget):
             self.node_list.item(index).setSelected(False)
         node_item_list = unpack(settings.value('nodeitemlist'))
         for item in node_item_list:
-            if len(self.node_list.findItems(item, Qt.MatchExactly)) == 0:
+            if len(self.node_list.findItems(item, Qt.MatchFlag.MatchExactly)) == 0:
                 self.node_list.addItem(item)
-            items = self.node_list.findItems(item, Qt.MatchExactly)
+            items = self.node_list.findItems(item, Qt.MatchFlag.MatchExactly)
             for item in items:
                 item.setSelected(True)
         self.handle_node_item_changed()

@@ -2,11 +2,42 @@
 Changelog for package rqt_console
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-2.2.2 (2025-12-15)
+2.4.3 (2026-04-13)
 ------------------
-* fix setuptools deprecations (backport `#50 <https://github.com/ros-visualization/rqt_console/issues/50>`_) (`#52 <https://github.com/ros-visualization/rqt_console/issues/52>`_)
-* Remove CODEOWNERS and mirror-rolling-to-main workflow (backport `#46 <https://github.com/ros-visualization/rqt_console/issues/46>`_) (`#47 <https://github.com/ros-visualization/rqt_console/issues/47>`_)
-* Contributors: mergify[bot]
+* Support Qt6 (`#58 <https://github.com/ros-visualization/rqt_console/issues/58>`_)
+* Contributors: Alejandro Hernández Cordero
+
+2.4.2 (2025-12-15)
+------------------
+* fixed copyright test (`#57 <https://github.com/ros-visualization/rqt_console/issues/57>`_)
+* added copyright header
+* fixed flake8 (`#56 <https://github.com/ros-visualization/rqt_console/issues/56>`_)
+* fixed flake8
+* remove residual imports in colored output test-file (`#55 <https://github.com/ros-visualization/rqt_console/issues/55>`_)
+* remove residual imports
+* basic support for colors and bold/bright using ANSI escape codes (`#54 <https://github.com/ros-visualization/rqt_console/issues/54>`_)
+* replace colorama dependency with manual ansi codes
+* add checkbox in the settings
+* support more color codes
+* basic support for colors and bold/bright
+* Contributors: Arne Hitzmann, Peter, peter
+
+2.4.1 (2025-07-30)
+------------------
+* fix setuptools deprecations (`#50 <https://github.com/ros-visualization/rqt_console/issues/50>`_)
+* Contributors: mosfet80
+
+2.4.0 (2025-04-28)
+------------------
+
+2.3.1 (2025-01-07)
+------------------
+* Add in standard tests. (`#48 <https://github.com/ros-visualization/rqt_console/issues/48>`_)
+* Remove CODEOWNERS and mirror-rolling-to-main workflow (`#46 <https://github.com/ros-visualization/rqt_console/issues/46>`_)
+* Contributors: Alejandro Hernández Cordero, Chris Lalancette
+
+2.3.0 (2024-04-26)
+------------------
 
 2.2.1 (2024-02-07)
 ------------------

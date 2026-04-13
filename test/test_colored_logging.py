@@ -1,4 +1,4 @@
-# Copyright (c) 2012, Willow Garage, Inc.
+# Copyright (c) 2025, Open Source Robotics Foundation, Inc.
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -11,7 +11,7 @@
 #     copyright notice, this list of conditions and the following
 #     disclaimer in the documentation and/or other materials provided
 #     with the distribution.
-#   * Neither the name of the Willow Garage, Inc. nor the names of its
+#   * Neither the name of the copyright holder nor the names of its
 #     contributors may be used to endorse or promote products derived
 #     from this software without specific prior written permission.
 #
@@ -28,14 +28,26 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-from .message_filter import MessageFilter
+import time
 
+import rclpy
+from rclpy.node import Node
 
-class LocationFilter(MessageFilter):
-    """Contains filter logic for a location filter."""
+rclpy.init()
 
-    def __init__(self):
-        super(LocationFilter, self).__init__()
+n = Node('test_logging')
 
-    def test_message(self, message):
-        return self._test_message(message.location)
+n.get_logger().info('normal')
+n.get_logger().info('\033[31m\033[1mbold and red!')
+n.get_logger().info('normal again')
+
+n.get_logger().warning('normal')
+n.get_logger().warning('\033[31m\033[1mbold and red!')
+n.get_logger().warning('normal again')
+
+n.get_logger().error('normal')
+n.get_logger().error('\033[31m\033[1mbold and red!')
+n.get_logger().error('normal again')
+
+# Ensure the messages make it to rosout before the script dies
+time.sleep(1)
