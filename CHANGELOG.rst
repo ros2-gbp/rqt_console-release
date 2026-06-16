@@ -2,13 +2,13 @@
 Changelog for package rqt_console
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-3.0.1 (2026-06-16)
+2.4.4 (2026-06-16)
 ------------------
-* Use logger.warning(), f-string and super() (`#59 <https://github.com/ros-visualization/rqt_console/issues/59>`_)
-* Contributors: Alejandro Hernández Cordero
-
-3.0.0 (2026-05-06)
-------------------
+* Use logger.warning(), f-string and super() (backport `#59 <https://github.com/ros-visualization/rqt_console/issues/59>`_) (`#60 <https://github.com/ros-visualization/rqt_console/issues/60>`_)
+  Use logger.warning(), f-string and super() (`#59 <https://github.com/ros-visualization/rqt_console/issues/59>`_)
+  (cherry picked from commit e5c93907c6574acc80334d9e024a4d1c2039d8c0)
+  Co-authored-by: Alejandro Hernández Cordero <ahcorde@gmail.com>
+* Contributors: mergify[bot]
 
 2.4.3 (2026-04-13)
 ------------------
